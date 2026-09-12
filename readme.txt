@@ -3,28 +3,32 @@ HARBORFLOW DISPATCH CONSOLE - TEAM README
 Run instructions
 ----------------
 Command:
-Python version tested:
+Python version tested:3.14.7
 
 Team members and concrete contributions
 ---------------------------------------
-Name:
+Name:Linder
 Contribution:
 
-Name:
+Name:Olha
 Contribution:
 
-Name:
+Name:Youyue
 Contribution:
 
-Name (if applicable):
-Contribution:
+Name:Moni
+Contribution: 
+- implemented task 1 (menu)
+- implemented task 2 (booking reference validation)
 
 Design notes
 ------------
 Main function boundaries:
+
 How input validation is organized:
+- input validating functions such as reference booking is defined outside of main()
 How shared calculations are reused:
 
 Known limitations
 -----------------
-Write "None known" or describe each known limitation.
+Moni: Reference booking validation: Validation will show the "Invalid" error message if the user omits the set hfl prefix and starts their input with a special character.
