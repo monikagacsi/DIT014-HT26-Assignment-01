@@ -10,7 +10,9 @@ def validate_reference(reference):
     prefix = "HFL"
     reference = reference.strip().upper()
     # split user input by '-' and removes white spaces
-    reference_parts = [i.strip() for i in reference.split('-')]  #List comprehension are disallowed by specs
+    reference_parts = []
+    for i in reference.split('-'):
+        reference_parts.append(i.strip()) #list comprehension removed
 
     # check if there are 3 parts, add prefix (HFL) is it's missing
     if len(reference_parts) == 2:
@@ -94,7 +96,7 @@ def positive_input(prompt):
             #task 6
 def classify_service_performance(promised_minutes, actual_minutes, damaged_parcels):
     delay = actual_minutes - promised_minutes
-    print(f"Delay:  {delay:.0f} minutes")
+    print(f"Delay: {delay:.0f} minutes")
     if damaged_parcels > 0:
         return "SERVICE FAILURE"
     elif delay <= 0:
@@ -141,17 +143,15 @@ def produce_weekly_report (deliveries, daily_target):
     # gives every piece of data a descriptive name
 
     
-    return{
-        "total": total,
-        "average": average,
-        "highest_day": highest_day,
-        "highest_val": highest_val,
-        "lowest_day": lowest_day,
-        "lowest_val": lowest_val,
-        "days_meeting_target": days_meeting_target
-
-    }
-
+    return [
+        total,
+        average,
+        highest_day,
+        highest_val,
+        lowest_day,
+        lowest_val,
+        days_meeting_target
+        ]
 
 def main():
     console_menu = (f'''
@@ -184,7 +184,7 @@ def main():
             reference = input("Booking reference: ")
             processed_reference = validate_reference(reference)
             if processed_reference:
-                print(f'Valid reference:  {processed_reference}')
+                print(f'Valid reference: {processed_reference}')
             else:
                 print("Invalid booking reference.")
         elif selected_service == 3:
@@ -213,8 +213,8 @@ def main():
             print(f"Total unique parcels: {len(unique_labels)}")
         elif selected_service == 5:
             #Check van capacity
-            van_capacity = positive_input("Enter van capacity (kg): ")
-            raw_weights = input("Enter parcel weights separated by comma: ")
+            van_capacity = positive_input("Van capacity (kg): ") #match CodeGrade rquired input
+            raw_weights = input("Parcel weights (kg): ")#match CodeGrade rquired input
 
             clean_text = raw_weights.replace(",", " ") #check strip. function instead
             #Split by whitespace and create an empty list
@@ -261,7 +261,7 @@ def main():
             
             while True:
                 try:
-                    target_daily = int(input("Enter daily target: "))
+                    target_daily = int(input("Daily target: ")) #match CodeGrade rquired input
                     if target_daily >= 0:
                         break
                     print("Target must be 0 or greater. Please try again.")
@@ -270,7 +270,7 @@ def main():
 
            #validate Deliveries (Loops until exactly 7 values are given)
             while True:
-                raw_deliveries = input("Enter seven comma-separated integers representing completed deliveries from Monday through Sunday: ")
+                raw_deliveries = input("Completed deliveries: ") #match CodeGrade rquired input
                 clean_text = raw_deliveries.replace(",", " ")#check with strip, Olha
                 deliveries_strings = clean_text.split()
 
@@ -293,17 +293,17 @@ def main():
 
             report = produce_weekly_report(deliveries_numeric, target_daily)
             #accessing particular values from the function return by key words in dictionary
-            print("Weekly dispatch report") #dict to list / Olha
-            print(f"Total deliveries: {report['total']}")
-            print(f"Average per day: {report['average']:.2f}")
-            print(f"Highest day: {report['highest_day']} ({report['highest_val']})")
-            print(f"Lowest day: {report['lowest_day']} ({report['lowest_val']})")
-            print(f"Days meeting target: {report['days_meeting_target']}")
+            print("Weekly dispatch report")
+            print(f"Total deliveries: {report[0]}")
+            print(f"Average per day: {report[1]:.2f}")
+            print(f"Highest day: {report[2]} ({report[3]})")
+            print(f"Lowest day: {report[4]} ({report[5]})")
+            print(f"Days meeting target: {report[6]}")
 
 
         elif selected_service == 8:
             # 1. Get distance
-            distance = non_negative_input("Distance (km): ")
+            distance = positive_input("Distance (km): ") #distance shouldnt be 0
             # 2. Get weight
             weight = positive_input("Weight (kg): ")
             # 3. Print quotes using your lists and index
