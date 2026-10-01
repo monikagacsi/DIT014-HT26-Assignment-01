@@ -108,7 +108,7 @@ def classify_service_performance(promised_minutes, actual_minutes, damaged_parce
     
 def produce_weekly_report (deliveries, daily_target):
     days_of_week = ["Monday","Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-    #Initializing tracking variables
+
     total = 0
     days_meeting_target = 0
     highest_val = deliveries[0]
@@ -120,28 +120,19 @@ def produce_weekly_report (deliveries, daily_target):
         val = deliveries[i]
         total += val
 
-        #check daily target
         if val >= daily_target:
             days_meeting_target += 1
 
-        #check the highest
         if val >= highest_val:
             highest_val = val
             highest_day = days_of_week[i]
 
-        #check the lowest
+
         if val <= lowest_val:
             lowest_val = val
             lowest_day = days_of_week[i]
 
     average = total/len(deliveries)
-
-    #Instead of returning a long
-    # tuple like return total, average, \
-    # highest_day, highest_val... where we have to 
-    # remember the exact order of 7 items, a dictionary 
-    # gives every piece of data a descriptive name
-
     
     return [
         total,
@@ -179,6 +170,7 @@ def main():
             #Close console
             print("Console closed. Dispatch data remains safe.")
             break
+
         elif selected_service == 2:
             #Validate booking reference = HFL-CCC-NNNN
             reference = input("Booking reference: ")
@@ -187,14 +179,12 @@ def main():
                 print(f'Valid reference: {processed_reference}')
             else:
                 print("Invalid booking reference.")
-        elif selected_service == 3:
-        # 1. Distance validation loop
-            distance = positive_input("Distance (km): ")
 
-            # 2. Weight validation loop
+        elif selected_service == 3:
+            # Calculate a delivery quote
+            distance = positive_input("Distance (km): ")
             weight = positive_input("Weight (kg): ")
-               
-            # 3. Service code validation loop
+
             while True:
                 service_code = input("Service code: ").strip().upper()
                 if service_code in ["S", "X", "P"]:
@@ -203,7 +193,10 @@ def main():
 
             quote = calculate_delivery_quote(distance, weight, service_code)
             print(f"Delivery quote: {quote:.2f} SEK")
+
+            
         elif selected_service == 4:
+            #Consolidate parcel labels
             parcels_input = input("Scanned labels: ")
             unique_labels = consolidate_parcel_labels(parcels_input)
             
@@ -211,6 +204,8 @@ def main():
             for idx in range(len(unique_labels)):
                 print(f"{idx + 1}. {unique_labels[idx]}")
             print(f"Total unique parcels: {len(unique_labels)}")
+ 
+
         elif selected_service == 5:
             #Check van capacity
             van_capacity = positive_input("Van capacity (kg): ") #match CodeGrade rquired input
@@ -244,21 +239,21 @@ def main():
 
             remaining_capacity = van_capacity - loaded_weight
 
-            #Print final summary
             print(f"Accepted parcels: {accepted_amount}")
             print(f"Loaded weight: {loaded_weight:.2f} kg")
             print(f"Remaining capacity: {remaining_capacity:.2f} kg")
 
+
         elif selected_service == 6:
-            #Classify service performance
+        #Task 6: Classify service performance
             promised_minutes = non_negative_input("Promised minutes: ")
             actual_minutes = non_negative_input("Actual minutes: ")
             damaged_parcels = non_negative_input("Damaged parcels: ")
             print(f"Service status: {classify_service_performance(promised_minutes, actual_minutes, damaged_parcels)}")
 
+
         elif selected_service == 7:
-            #Produce weekly dispatch report
-            
+            #Task 7: Produce the weekly dispatch report          
             while True:
                 try:
                     target_daily = int(input("Daily target: ")) #match CodeGrade rquired input
@@ -300,19 +295,15 @@ def main():
             print(f"Lowest day: {report[4]} ({report[5]})")
             print(f"Days meeting target: {report[6]}")
 
-
+        #Task 9: Compare delivery scenarios
         elif selected_service == 8:
-            # 1. Get distance
             distance = positive_input("Distance (km): ") #distance shouldnt be 0
-            # 2. Get weight
             weight = positive_input("Weight (kg): ")
-            # 3. Print quotes using your lists and index
             service_codes = ["S", "X", "P"]
             service_names = ["Standard", "Express", "Priority"]
             
             print("Service comparison")
-
-            
+       
             highest_price = -1
             cheapest_service = ""
             lowest_price = None
@@ -334,9 +325,6 @@ def main():
 
             print(f"Cheapest service: {cheapest_service}")
             print(f"Most expensive service: {most_expensive_service}")
-                        
-            
-           
         else:
             print("Invalid input. Please select a service from the menu.")
 
