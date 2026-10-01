@@ -3,7 +3,7 @@ HARBORFLOW DISPATCH CONSOLE - TEAM README
 Run instructions
 ----------------
 Command:
-Python version tested:
+Python version tested: 3.14
 
 Team members and concrete contributions
 ---------------------------------------
@@ -21,13 +21,15 @@ Contribution:
 
 Name: Linder
 Contribution:
-Task 3, Task 4 and task 9, some code improvements.
+- Task 3
+- Task 4
+- Task 9, some code improvements
 
 Name: Olha
 Contribution:
-Task 5
-Task 7
-Task 9
+- Task 5
+- Task 7
+- Task 9
 
 
 Design notes
@@ -52,14 +54,9 @@ calculate_delivery_quote() serves both option 3 and option 8
 
 Known limitations
 -----------------
-- Menu point  5 calls float() without try/except, so non-numeric weights crash the program.
-- Menu point  6 accepts decimal damaged-parcel counts.
-- classify_service_performance() prints the delay itself, mixing output into a logic function.
-- produce_weekly_report() returns a list, so callers must remember index positions (0 to 6).
+- Classify_service_performance() prints the delay itself, mixing output into a logic function.
+- Produce_weekly_report() returns a list, so callers must remember index positions (0 to 6).
+- Task 7 completed deliveries accepts negative numbers
+- Task 2  Reference booking validation: Validation will show the "Invalid" error message if the user omits the set hfl prefix and starts their input with a special character.
+- Task 4  Parcel labels not validated for nonnumeric values.
 
-
-
-Task 4 Limitation:
-The program does not validate the input parcels.
-
-Moni: Task 2 - Reference booking validation: Validation will show the "Invalid" error message if the user omits the set hfl prefix and starts their input with a special character.
