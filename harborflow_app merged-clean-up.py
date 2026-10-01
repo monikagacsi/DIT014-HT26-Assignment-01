@@ -1,18 +1,10 @@
-
-
-"""HarborFlow Assignment 1 starter file.
-
-Replace the TODO sections with your team's implementation. Keep the program
-entry point so the file can be run with: python harborflow_app.py
-"""
-
 def validate_reference(reference):
     prefix = "HFL"
     reference = reference.strip().upper()
     # split user input by '-' and removes white spaces
     reference_parts = []
     for i in reference.split('-'):
-        reference_parts.append(i.strip()) #list comprehension removed
+        reference_parts.append(i.strip()) 
 
     # check if there are 3 parts, add prefix (HFL) is it's missing
     if len(reference_parts) == 2:
@@ -20,7 +12,6 @@ def validate_reference(reference):
     if len(reference_parts) != 3:
         return None
         
-    #split input into 3 parts
     part1, part2, part3 = reference_parts
 
     # check if prefix is correct, part2 only contains characters, part3 only contains integers
@@ -71,16 +62,27 @@ def check_van_capacity(van_capacity, parcel_weights):
             accepted_rejected_status.append(False)
     return accepted_rejected_status #an array of Trues and Falses    
 
-#Validation input >=0
-def non_negative_input(prompt):
+    #Validation float input >=0
+def non_negative_float(prompt):
     while True:
         try:
             value = float(input(prompt))
             if value >= 0:
                 return value
-            print ("Invalid input. Please enter 0 or greater.")
+            print ("Error - Value must be greater than zero or 0.")
         except ValueError:
-            print ("Invalid input. Please enter 0 or greater.")
+            print ("Error - Value must be greater than zero or 0.")
+
+            #Validation integer input >=0:
+def non_negative_integer(prompt):
+    while True:
+        try:
+            value = int(input(prompt))
+            if value >= 0:
+                return value
+            print("Error - Value must be an integer greater than zero or 0. ")
+        except ValueError:
+            print("Error - Value must be an integer greater than zero or 0. ")
 
             #Validation input >0
 def positive_input(prompt):
@@ -89,11 +91,10 @@ def positive_input(prompt):
             value = float(input(prompt))
             if value > 0:
                 return value
-            print("Invalid input. Please enter value greater than 0. ")
+            print("Error - Value must be greater than zero. ")
         except ValueError:
-            print("Invalid input. Please enter value greater than 0. ")
+            print("Error - Value must be greater than zero. ")
 
-            #task 6
 def classify_service_performance(promised_minutes, actual_minutes, damaged_parcels):
     delay = actual_minutes - promised_minutes
     print(f"Delay: {delay:.0f} minutes")
@@ -208,11 +209,11 @@ def main():
 
         elif selected_service == 5:
             #Check van capacity
-            van_capacity = positive_input("Van capacity (kg): ") #match CodeGrade rquired input
+            van_capacity = positive_input("Van capacity (kg): ")
 
             # Input validation loop for parcel weights
             while True:
-                raw_weights = input("Parcel weights (kg): ") # match CodeGrade required input
+                raw_weights = input("Parcel weights (kg): ")
 
                 clean_text = raw_weights.replace(",", " ")
                 weight_strings = clean_text.split()
@@ -228,7 +229,7 @@ def main():
                         has_error = True
                         break  
 
-                #all values converted successfully and list is not empty
+                #All values converted successfully and list is not empty
                 if not has_error and len(parcel_weights) > 0:
                     break  
                 else:
@@ -259,28 +260,21 @@ def main():
 
 
         elif selected_service == 6:
-        #Task 6: Classify service performance
-            promised_minutes = non_negative_input("Promised minutes: ")
-            actual_minutes = non_negative_input("Actual minutes: ")
-            damaged_parcels = non_negative_input("Damaged parcels: ")
+        #Classify service performance
+            promised_minutes = non_negative_float("Promised minutes: ")
+            actual_minutes = non_negative_float("Actual minutes: ")
+            damaged_parcels = non_negative_integer("Damaged parcels: ")
             print(f"Service status: {classify_service_performance(promised_minutes, actual_minutes, damaged_parcels)}")
 
 
         elif selected_service == 7:
-            #Task 7: Produce the weekly dispatch report          
-            while True:
-                try:
-                    target_daily = int(input("Daily target: ")) #match CodeGrade rquired input
-                    if target_daily >= 0:
-                        break
-                    print("Target must be 0 or greater. Please try again.")
-                except ValueError:
-                    print("Invalid input. Please enter a whole number.")
+            #Produce the weekly dispatch report          
+            target_daily = non_negative_integer("Enter daily target: ")
 
            #validate Deliveries (Loops until exactly 7 values are given)
             while True:
-                raw_deliveries = input("Completed deliveries: ") #match CodeGrade rquired input
-                clean_text = raw_deliveries.replace(",", " ")#check with strip, Olha
+                raw_deliveries = input("Completed deliveries: ")
+                clean_text = raw_deliveries.replace(",", " ")
                 deliveries_strings = clean_text.split()
 
                 # Check if the user entered exactly 7 values
@@ -301,7 +295,6 @@ def main():
                     print("Error: All values must be whole numbers. Try again.")
 
             report = produce_weekly_report(deliveries_numeric, target_daily)
-            #accessing particular values from the function return by key words in dictionary
             print("Weekly dispatch report")
             print(f"Total deliveries: {report[0]}")
             print(f"Average per day: {report[1]:.2f}")
@@ -309,8 +302,9 @@ def main():
             print(f"Lowest day: {report[4]} ({report[5]})")
             print(f"Days meeting target: {report[6]}")
 
-        #Task 9: Compare delivery scenarios
+        
         elif selected_service == 8:
+            #Compare delivery scenarios
             distance = positive_input("Distance (km): ") #distance shouldnt be 0
             weight = positive_input("Weight (kg): ")
             service_codes = ["S", "X", "P"]
