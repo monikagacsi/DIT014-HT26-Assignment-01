@@ -214,16 +214,30 @@ def main():
         elif selected_service == 5:
             #Check van capacity
             van_capacity = positive_input("Van capacity (kg): ") #match CodeGrade rquired input
-            raw_weights = input("Parcel weights (kg): ")#match CodeGrade rquired input
 
-            clean_text = raw_weights.replace(",", " ") #check strip. function instead
-            #Split by whitespace and create an empty list
-            weight_strings = clean_text.split()
-            parcel_weights = []
+            # Input validation loop for parcel weights
+            while True:
+                raw_weights = input("Parcel weights (kg): ") # match CodeGrade required input
 
-            #typecasting to float
-            for weight_str in weight_strings:
-                parcel_weights.append(float(weight_str))
+                clean_text = raw_weights.replace(",", " ")
+                weight_strings = clean_text.split()
+                parcel_weights = []
+                
+                has_error = False
+
+                # Typecasting to float with error checking
+                for weight_str in weight_strings:
+                    try:
+                        parcel_weights.append(float(weight_str))
+                    except ValueError:
+                        has_error = True
+                        break  
+
+                #all values converted successfully and list is not empty
+                if not has_error and len(parcel_weights) > 0:
+                    break  
+                else:
+                    print("Invalid input. All parcel weights must be numeric values. Please try again.")
 
             output = check_van_capacity(van_capacity,parcel_weights)
 
