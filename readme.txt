@@ -2,7 +2,7 @@ HARBORFLOW DISPATCH CONSOLE - TEAM README
 
 Run instructions
 ----------------
-Command:
+Command: harborflow_app.py
 Python version tested: 3.14
 
 Team members and concrete contributions
@@ -11,12 +11,16 @@ Name: Youyue (Avery)
 Contribution:
 - Task 6 (Classify service performance )
 - Two validation functions(input>0 and input>=0)
+- Task 8 + testing
 
 Name: Monika
 Contribution: 
+- github repo setup
 - implemented task 1 (menu)
 - implemented task 2 (booking reference validation)
 - implemented task 9  with Olha and Linder
+- task 8 + testing
+- run tests in test-ledger.csv 
 
 
 Name: Linder
@@ -24,11 +28,13 @@ Contribution:
 - Task 3
 - Task 4
 - Task 9, some code improvements
+- Task 8 + testing
 
 Name: Olha
 Contribution:
 - Task 5
 - Task 7
+- Task 8 + testing
 - Task 9
 
 
