@@ -1,10 +1,10 @@
 area,test_case,input_summary,expected_result,actual_result,owner,status
-Menu,Close console,Option 1,Closing message printed exactly once,,,Not run
-Reference,Valid lowercase,Lowercase valid reference,Normalized valid reference,,,Not run
-Quote,Decimal values,Decimal distance and weight,Two-decimal quote,,,Not run
-Labels,Duplicates,Mixed case duplicate labels,First-seen unique order,,,Not run
-Capacity,Later item fits,Rejected heavy item followed by lighter item,Later item accepted,,,Not run
-Performance,Boundary delay,Delay of 15 minutes,MINOR DELAY,,,Not run
-Weekly report,Last-day tie,Tied high or low on later day,Last tied day reported,,,Not run
-Validation,Invalid then valid,Invalid value followed by valid value,Only affected prompt repeats,,,Not run
-Scenarios,All services,One distance and weight,Three prices and extrema,,,Not run
+Menu,Close console,Option 1,Closing message printed exactly once,Message printed only once,tester:Moni,Pass
+Reference,Valid lowercase,Lowercase valid reference,Normalized valid reference,Valid reference was given back fitting formatting requirements,tester:Moni,Pass
+Quote,Decimal values,Decimal distance and weight,Two-decimal quote,Distance and weight accepted float and quote gave back aformatted float showing num two decimal points,tester:Moni,Pass
+Labels,Duplicates,Mixed case duplicate labels,First-seen unique order,First from user input shows up first in printed list,tester:Moni,Pass
+Capacity,Later item fits,Rejected heavy item followed by lighter item,Later item accepted,Over-the-limit weight rejected and smaller packages accepted,tester:Moni,Pass
+Performance,Boundary delay,Delay of 15 minutes,MINOR DELAY,Prints minor delay correctly,tester:Moni,Pass
+Weekly report,Last-day tie,Tied high or low on later day,Last tied day reported,Correctly shows highest and lowest days,tester:Moni,Pass
+Validation,Invalid then valid,Invalid value followed by valid value,Only affected prompt repeats,Checked for menupoints 1-8. For invalid values an error message was shown and for valid values the function ran,tester:Moni,Pass
+Scenarios,All services,One distance and weight,Three prices and extrema,Comparison correctly printed 3 different calculated values,tester:Moni,Pass
