@@ -190,7 +190,7 @@ def main():
                 service_code = input("Service code: ").strip().upper()
                 if service_code in ["S", "X", "P"]:
                     break
-                print("Error: Service code must be S, X or P.")
+                print("Error - Service code must be S, X or P")
 
             quote = calculate_delivery_quote(distance, weight, service_code)
             print(f"Delivery quote: {quote:.2f} SEK")
