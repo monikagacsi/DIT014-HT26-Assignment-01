@@ -209,7 +209,7 @@ def main():
                 service_code = input("Service code: ").strip().upper()
                 if service_code in ["S", "X", "P"]:
                     break
-                print("Error - Service code must be S, X or P")
+                print("Error - Service code must be S, X or P.")
 
             quote = calculate_delivery_quote(distance, weight, service_code)
             print(f"Delivery quote: {quote:.2f} SEK")
@@ -288,7 +288,6 @@ def main():
 
         elif selected_service == 7:
             # Produce the weekly dispatch report
-            target_daily = non_negative_integer("Enter daily target: ")
 
             # validate Deliveries (Loops until exactly 7 values are given)
             while True:
@@ -314,7 +313,7 @@ def main():
                     break
                 except ValueError:
                     print("Error: All values must be whole numbers. Try again.")
-
+            target_daily = non_negative_integer("Enter daily target: ")
             report = produce_weekly_report(deliveries_numeric, target_daily)
             print("Weekly dispatch report")
             print(f"Total deliveries: {report[0]}")
